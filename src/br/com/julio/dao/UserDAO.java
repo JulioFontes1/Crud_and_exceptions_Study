@@ -43,7 +43,7 @@ public class UserDAO {
 
     }
 
-    public List<UserModel> findAll (){
+    public List<UserModel> findAll(){
         return models;
     }
 }
