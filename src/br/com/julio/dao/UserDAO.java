@@ -3,6 +3,7 @@ package br.com.julio.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.julio.exception.EmptyStorageException;
 import br.com.julio.exception.UserNotFoundException;
 import br.com.julio.model.UserModel;
 
@@ -33,7 +34,7 @@ public class UserDAO {
     }
 
     public UserModel findById(final long id){
-
+        verifyStorage();  //Alterar o verifyStorage de lugar
         var message = String.format("Usuário com id %s não encontrado!", id);
 
         return models.stream()
@@ -45,5 +46,9 @@ public class UserDAO {
 
     public List<UserModel> findAll(){
         return models;
+    }
+
+    private void verifyStorage(){
+        if(models.isEmpty()) throw new EmptyStorageException("Nenhum usuário armazenado.");
     }
 }
